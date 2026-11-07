@@ -85,15 +85,11 @@ const deleteProductById = async (id) => {
 
 
 const seedProducts = async () => {
-  try {
-    productsData.forEach(async (product) => {
-      const newProduct = await createProduct(product);
-      if (!newProduct) {
-        throw new Error("Error al sembrar el producto: " + product.id);
-      }
-    });
-  } catch (error) {
-    throw new Error("Error al sembrar los productos: " + error.message);
+  for (const product of productsData) {
+    const newProduct = await createProduct(product);
+    if (!newProduct) {
+      throw new Error("Error al sembrar el producto: " + product.model);
+    }
   }
 };
 
