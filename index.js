@@ -7,7 +7,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors({
-  origin: ['https://node-tfi-frontend.web.app', 'http://localhost:4200',],
+  origin: ['https://node-tfi.web.app', 'http://localhost:4200',],
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
