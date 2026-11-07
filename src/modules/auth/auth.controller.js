@@ -1,9 +1,8 @@
-const { eventNames } = require("../users/user.model");
 const authService = require("./auth.service");
 
 const toPublicUser = (user) => {
   return {
-    id: user.id,
+    _id: user._id,
     name: user.name,
     email: user.email,
   }
@@ -24,11 +23,9 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const newUser = await authService.createUser({ username: name, email, password });
-    if (!newUser) {
-      return res.status(401).json({ message: 'Error al registrar usuario' });
-    }
-    return res.status(200).json({ message: 'Usuario registrado exitoso', user: toPublicUser(newUser) });
+    const newUser = await authService.createUser({ name, email, password });
+    const token = authService.signToken(newUser);
+    return res.status(200).json({ message: 'Usuario registrado exitoso', user: toPublicUser(newUser), token });
   } catch (error) {
     return res.status(500).json({ message: 'Error al registrar usuario', error: error.message });
   }

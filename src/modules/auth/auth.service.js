@@ -28,7 +28,6 @@ const loginUser = async (email, password) => {
     if (!(await bcryptjs.compare(password, user.password))) {
       throw new Error("Contraseña incorrecta");
     }
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     return { user, token };
   }
   catch (error) {
