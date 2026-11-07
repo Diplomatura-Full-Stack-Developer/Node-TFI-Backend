@@ -4,15 +4,13 @@
 
 ### Módulo 1: Node JS
 
-### Unidad 4: Integración Front-Back
+### Trabajo Final Integrador
 
-### Tarea 4: Conectando mi frontend con la API y desplegando.
+### Desarrollo en Node JS
 
 ### Objetivos:
 
-Conectar un frontend (React o Angular) a un backend en Express.
-
-Realizar peticiones reales y preparar ambos entornos para despliegue.
+Construir una API RESTful CON Node.js, Express y MongoDB que sirva como backend para una aplicación de chat (o similar), integrando la lógica del servidor con persistencia de datos en base de datos.
 
 ### Consideraciones del backend:
 
@@ -28,20 +26,22 @@ No se pretende desarrollar una aplicación completa, sino establecer algunas fun
 ```javascript
 app.use(
   cors({
-    origin: ['https://angular-m1-t4.web.app', 'http://localhost:4200'],
+    origin: ['https://node-tfi.web.app', 'http://localhost:4200'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 );
 ```
 
-- Los passwords que generan los clientes se cifran con **bcrypt** para mayor seguridad.
+- Los passwords que generan los clientes se cifran con **bcryptjs** para mayor seguridad.
+- Se utiliza **jsonwebtoken** para la autenticación y la generación de tokens.
+- Se implementa un **middleware** para la autenticación de los endpoints que lo requieren. En este caso, los endpoints relacionados con las páginas del carrito.
 
 ### Pasos para la ejecución local:
 
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/Diplomatura-Full-Stack-Developer/Node-M1-T4
+git clone https://github.com/Diplomatura-Full-Stack-Developer/Node-TFI
 ```
 
 2. Instalar las dependencias.
@@ -76,7 +76,7 @@ npm run dev
 - Mongoose - Versión 9.11.3 ([https://www.npmjs.com/package/mongoose](https://www.npmjs.com/package/mongoose))
 - MongoDB Compass - Versión 1.40.4 ([https://www.mongodb.com/es/products/compass](https://www.mongodb.com/es/products/compass))
 - Cors - Versión 2.8.6 ([https://www.npmjs.com/package/cors](https://www.npmjs.com/package/cors))
-- Bcrypt - Versión 6.0.0 ([https://www.npmjs.com/package/bcrypt](https://www.npmjs.com/package/bcrypt))
+- bcryptjs - Versión 6.0.0 ([https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs))
 
 ### Alumno: Rubén Seco
 
