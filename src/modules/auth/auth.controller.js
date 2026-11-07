@@ -13,9 +13,9 @@ const loginUser = async (req, res) => {
 
 
 const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   try {
-    const newUser = await authService.createUser(email, password);
+    const newUser = await authService.createUser({ username: name, email, password });
     if (!newUser) {
       return res.status(401).json({ message: 'Error al registrar usuario' });
     }
