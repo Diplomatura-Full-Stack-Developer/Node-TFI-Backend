@@ -41,7 +41,7 @@ app.use(
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/Diplomatura-Full-Stack-Developer/Node-TFI
+git clone https://github.com/Diplomatura-Full-Stack-Developer/Node-TFI-Backend
 ```
 
 2. Instalar las dependencias.
