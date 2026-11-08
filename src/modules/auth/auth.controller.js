@@ -1,4 +1,6 @@
 const authService = require("./auth.service");
+const { userSchema } = require("../../validations/user.validation");
+
 
 const toPublicUser = (user) => {
   return {
@@ -21,7 +23,12 @@ const loginUser = async (req, res) => {
 
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+
+  const validation = userSchema.safeParse(req.body);
+  if (!validation.success) {
+    return res.status(400).json({ message: 'Datos inválidos', error: validation.error.message });
+  }
+  const { name, email, password } = validation.data;
   try {
     const newUser = await authService.createUser({ name, email, password });
     return res.status(200).json({ message: 'Usuario registrado exitoso', user: toPublicUser(newUser.user), token: newUser.token });

@@ -35,6 +35,7 @@ app.use(
 - Los passwords que generan los clientes se cifran con **bcryptjs** para mayor seguridad.
 - Se utiliza **jsonwebtoken** para la autenticación y la generación de tokens.
 - Se implementa un **middleware** para la autenticación de los endpoints que lo requieren. En este caso, los endpoints relacionados con las páginas del carrito.
+- Se implementan esquemas de validación de datos con **zod** para validar los datos de entrada de los endpoints.
 
 ### Pasos para la ejecución local:
 
@@ -77,6 +78,8 @@ npm run dev
 - MongoDB Compass - Versión 1.40.4 ([https://www.mongodb.com/es/products/compass](https://www.mongodb.com/es/products/compass))
 - Cors - Versión 2.8.6 ([https://www.npmjs.com/package/cors](https://www.npmjs.com/package/cors))
 - bcryptjs - Versión 6.0.0 ([https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs))
+- jsonwebtoken - Versión 9.0.3 ([https://www.npmjs.com/package/jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken))
+- zod - Versión 4.6.7 ([https://www.npmjs.com/package/zod](https://www.npmjs.com/package/zod))
 
 ### Alumno: Rubén Seco
 

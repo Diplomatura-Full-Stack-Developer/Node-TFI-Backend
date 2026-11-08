@@ -1,4 +1,5 @@
 const productService = require("./product.service");
+const { productSchema } = require("../../validations/product.validation");
 
 const welcomeProductAPI = (req, res) => {
   res.status(200).json({ message: "Bienvenido a la API de productos" });
@@ -24,7 +25,11 @@ const getProductById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  const product = req.body;
+  const validation = productSchema.safeParse(req.body);
+  if (!validation.success) {
+    return res.status(400).json({ message: 'Datos inválidos', error: validation.error.message });
+  }
+  const product = validation.data;
   try {
     const newProduct = await productService.createProduct(product);
     res.status(200).json(newProduct);
