@@ -2,9 +2,9 @@ const cartService = require("./cart.service");
 const productService = require("../products/product.service");
 
 const getCartByUserId = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   try {
-    const cart = await cartService.getCartByUserId(id);
+    const cart = await cartService.getCartByUserId(userId);
     res.status(200).json(cart);
   } catch (error) {
     res.status(500).json({ message: error.message, data: null });

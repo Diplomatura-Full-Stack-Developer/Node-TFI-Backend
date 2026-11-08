@@ -2,7 +2,7 @@ const authService = require("./auth.service");
 
 const toPublicUser = (user) => {
   return {
-    id: user.id,
+    userId: user.id,
     name: user.name,
     email: user.email,
   }

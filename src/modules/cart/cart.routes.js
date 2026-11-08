@@ -6,7 +6,7 @@ const { getCartByUserId, createCart, addProductToCart, removeProductFromCart } =
 const cartRouter = express.Router();
 
 
-cartRouter.get("/cart/:id", authenticateJWT, getCartByUserId);
+cartRouter.get("/cart/:userId", authenticateJWT, getCartByUserId);
 
 cartRouter.post("/cart", authenticateJWT, createCart);
 
