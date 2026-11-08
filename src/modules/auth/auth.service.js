@@ -13,7 +13,8 @@ const createUser = async (user) => {
     }
     user.password = await bcryptjs.hash(user.password, 10);
     const newUser = await userModel.create(user);
-    return newUser;
+    const token = signToken(newUser);
+    return { user: newUser, token };
   } catch (error) {
     throw new Error("Error al crear el usuario: " + error.message);
   }
@@ -28,6 +29,7 @@ const loginUser = async (email, password) => {
     if (!(await bcryptjs.compare(password, user.password))) {
       throw new Error("Contraseña incorrecta");
     }
+    const token = signToken(user);
     return { user, token };
   }
   catch (error) {
@@ -35,5 +37,8 @@ const loginUser = async (email, password) => {
   }
 };
 
+const signToken = (user) => {
+  return jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+}
 
 module.exports = { createUser, loginUser };
