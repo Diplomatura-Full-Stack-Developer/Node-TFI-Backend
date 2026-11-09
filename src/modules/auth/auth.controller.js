@@ -24,19 +24,13 @@ const loginUser = async (req, res) => {
 
 const registerUser = async (req, res) => {
 
-  const validation = userSchema.safeParse(req.body);
-  if (!validation.success) {
-    return res.status(400).json({ message: 'Datos inválidos', error: validation.error.message });
-  }
-  const { name, email, password } = validation.data;
-  try {
-    const newUser = await authService.createUser({ name, email, password });
-    return res.status(200).json({ message: 'Usuario registrado exitoso', user: toPublicUser(newUser.user), token: newUser.token });
-  } catch (error) {
-    return res.status(500).json({ message: 'Error al registrar usuario', error: error.message });
-  }
+  const { name, email, password } = userSchema.parse(req.body);
+  const newUser = await authService.createUser({ name, email, password });
+  return res.status(200).json({
+    message: "Usuario registrado exitoso",
+    user: toPublicUser(newUser.user),
+    token: newUser.token,
+  });
 };
-
-
 
 module.exports = { loginUser, registerUser };

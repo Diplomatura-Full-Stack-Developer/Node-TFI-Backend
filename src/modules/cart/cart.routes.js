@@ -1,5 +1,5 @@
 const express = require("express");
-const { authenticateJWT } = require("../auth/auth.middleware");
+const { authenticateJWT } = require("../../middlewares/auth.middleware");
 const { getCartByUserId, createCart, addProductToCart, removeProductFromCart } = require("./cart.controller");
 
 

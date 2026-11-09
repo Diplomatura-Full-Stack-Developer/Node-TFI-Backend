@@ -27,7 +27,7 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   const validation = productSchema.safeParse(req.body);
   if (!validation.success) {
-    return res.status(400).json({ message: 'Datos inválidos', error: validation.error.message });
+    return res.status(500).json({ message: 'Datos inválidos', error: validation.error.issues });
   }
   const product = validation.data;
   try {
