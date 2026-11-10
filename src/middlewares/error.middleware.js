@@ -2,6 +2,7 @@
 const { z } = require("zod");
 const handleMongooseError = require("./errors/handle-mongoose-error");
 const handleZodError = require("./errors/handle-zod-error");
+const handleAppError = require("./errors/handle-app-error");
 
 const errorMiddleware = (err, req, res, next) => {
 
@@ -15,8 +16,12 @@ const errorMiddleware = (err, req, res, next) => {
     return mongooseResponse;
   }
 
-  console.error(err);
-  return res.status(500).json({ message: "Internal server error" });
+  const appResponse = handleAppError(err, res);
+  if (appResponse) {
+    return appResponse;
+  }
+
+  return handleUnknownError(err, res);
 };
 
 module.exports = errorMiddleware;

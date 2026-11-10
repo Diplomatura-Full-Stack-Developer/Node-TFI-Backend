@@ -1,15 +1,13 @@
-const userModel = require("../users/user.model");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-
-
+const userModel = require("./auth.model");
+const AppError = require("../../utils/classes/app-error");
 
 const createUser = async (user) => {
   try {
     const existingUser = await userModel.findOne({ email: user.email });
     if (existingUser) {
-      throw new AppError("El usuario ya existe", 409);
+      throw new AppError("DUPLICATE_KEY", "El usuario ya existe", 409);
     }
     user.password = await bcryptjs.hash(user.password, 10);
     const newUser = await userModel.create(user);

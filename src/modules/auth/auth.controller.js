@@ -1,5 +1,4 @@
 const authService = require("./auth.service");
-const { userSchema } = require("../../validations/user.validation");
 
 
 const toPublicUser = (user) => {
@@ -13,18 +12,16 @@ const toPublicUser = (user) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  try {
-    const { user, token } = await authService.loginUser(email, password);
-    return res.status(200).json({ message: 'Inicio de sesión exitoso', user: toPublicUser(user), token: token });
-  } catch (error) {
-    return res.status(500).json({ message: 'Error al iniciar sesión', error: error.message });
-  }
+  const { user, token } = await authService.loginUser(email, password);
+  return res.status(200).json({
+    message: "Inicio de sesión exitoso",
+    user: toPublicUser(user),
+    token,
+  });
 };
 
-
 const registerUser = async (req, res) => {
-
-  const { name, email, password } = userSchema.parse(req.body);
+  const { name, email, password } = req.body;
   const newUser = await authService.createUser({ name, email, password });
   return res.status(200).json({
     message: "Usuario registrado exitoso",
@@ -32,5 +29,4 @@ const registerUser = async (req, res) => {
     token: newUser.token,
   });
 };
-
 module.exports = { loginUser, registerUser };

@@ -1,7 +1,8 @@
 const express = require("express");
-const { welcomeProductAPI, getProducts, getProductById, createProduct, updateProductById, deleteProductById } = require("./product.controller");
-
 const productRouter = express.Router();
+const { welcomeProductAPI, getProducts, getProductById, createProduct } = require("./product.controller");
+const { validateMiddleware } = require("../../middlewares/validate.middleware");
+const { productSchemaValidation } = require("../../validations/product.validation");
 
 
 
@@ -11,10 +12,7 @@ productRouter.get("/products", getProducts);
 
 productRouter.get("/products/:id", getProductById);
 
-productRouter.post("/product", createProduct);
+productRouter.post("/product", validateMiddleware(productSchemaValidation), createProduct);
 
-productRouter.put("/product/:id", updateProductById);
-
-productRouter.delete("/product/:id", deleteProductById);
 
 module.exports = productRouter;

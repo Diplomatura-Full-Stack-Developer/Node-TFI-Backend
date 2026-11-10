@@ -6,6 +6,7 @@ const handleZodError = (err, res) => {
   }
 
   return res.status(400).json({
+    code: "VALIDATION_ERROR",
     message: "Datos inválidos",
     errors: err.issues.map((issue) => ({
       field: issue.path.join("."),
