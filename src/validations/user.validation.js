@@ -8,7 +8,7 @@ const userSchemaValidation = z.object({
 });
 
 const loginSchemaValidation = z.object({
-  email: z.string().email({ message: "El email no es válido" }),
+  email: z.email({ pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "El email no es válido" }),
   password: z.string().min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
 });
 

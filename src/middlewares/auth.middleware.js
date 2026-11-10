@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const AppError = require('../utils/classes/app-error');
 
 // Middleware for JWT verification
 const authenticateJWT = (req, res, next) => {
@@ -7,14 +7,14 @@ const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ message: 'Authorization header missing' });
+    return next(new AppError("AUTHORIZATION_HEADER_MISSING", "Authorization header missing", 401));
   }
 
   // Extract token from "Bearer <token>"
   const token = authHeader.split(' ')[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Token missing' });
+    return next(new AppError("TOKEN_MISSING", "Token missing", 401));
   }
 
   try {
@@ -26,7 +26,7 @@ const authenticateJWT = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(403).json({ message: 'Invalid or expired token' });
+    return next(new AppError("TOKEN_INVALID", "Invalid or expired token", 403));
   }
 };
 

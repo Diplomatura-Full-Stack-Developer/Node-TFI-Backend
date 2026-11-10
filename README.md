@@ -38,6 +38,12 @@ app.use(
 - Se implementan esquemas de validación de datos con **zod** para validar los datos de entrada de los endpoints.
 - Se implementa un **middleware** para el manejo de errores globales. Este middleware se encarga de manejar los errores que ocurren en la aplicación y de devolver una respuesta adecuada al cliente. Del lado del cliente son recibidos por el **interceptor** de la petición HTTP y los errores globales por el **ErrorHandler** de Angular. Luego serán gestionados por un **errorHandlerService** para enviar las respuestas al cliente. Esto evita codigo de manejo de errores en los controladores y rutas de la aplicación.
 
+### Implementación de manejo de errores:
+
+Se implementa un **middleware** para el manejo de errores globales. Este middleware se encarga de manejar los errores que ocurren en la aplicación y de devolver una respuesta adecuada al cliente. Del lado del cliente son recibidos por el **interceptor** de la petición HTTP y los errores globales por el **ErrorHandler** de Angular. Luego serán gestionados por un **errorHandlerService** para enviar las respuestas al cliente. Esto evita codigo de manejo de errores en los controladores y rutas de la aplicación.<br>
+Se adjunta un diagrama para visualizar la implementación de manejo de errores:<br>
+![Diagrama de manejo de errores](./assets/images/ManejoDeErrores.png)<br>
+
 ### Pasos para la ejecución local:
 
 1. Clonar el repositorio:
