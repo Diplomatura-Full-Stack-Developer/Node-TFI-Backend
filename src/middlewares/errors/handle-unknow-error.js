@@ -1,4 +1,4 @@
-const handleUnknownError = (err, res) => {
+const handleUnknowError = (err, res) => {
   console.error(err);
 
   return res.status(500).json({
@@ -7,4 +7,4 @@ const handleUnknownError = (err, res) => {
   });
 };
 
-module.exports = { handleUnknownError };
+module.exports = { handleUnknowError };

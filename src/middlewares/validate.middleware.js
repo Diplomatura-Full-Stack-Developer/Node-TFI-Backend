@@ -1,13 +1,16 @@
 
 
 
-const validateMiddleware = (schema, source = "body") => (req, res, next) => {
-  try {
-    req[source] = schema.parse(req[source]);
-    next();
-  } catch (error) {
-    next(error);
+const validateMiddleware = (schema, source = "body", meta = {}) => (req, res, next) => {
+  const result = schema.safeParse(req[source]);
+
+  if (!result.success) {
+    result.error.form = meta.form ?? null;
+    return next(result.error);
   }
+
+  req[source] = result.data;
+  next();
 };
 
 module.exports = { validateMiddleware };

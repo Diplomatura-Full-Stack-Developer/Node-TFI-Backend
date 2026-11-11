@@ -23,11 +23,14 @@ const productSchema = new Schema({
   stock: {
     type: Number,
     required: true,
+    min: 0,
+    default: 0,
   },
   price: {
     type: Number,
     required: true,
     min: 0,
+    default: 0,
   },
   offer: {
     type: Boolean,
@@ -53,6 +56,7 @@ const productSchema = new Schema({
     required: true,
     min: 0,
     max: 40,
+    default: 0,
   },
 });
 

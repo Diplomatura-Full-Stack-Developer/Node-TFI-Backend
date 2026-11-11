@@ -12,7 +12,7 @@ productRouter.get("/products", getProducts);
 
 productRouter.get("/products/:id", getProductById);
 
-productRouter.post("/product", validateMiddleware(productSchemaValidation), createProduct);
+productRouter.post("/product", validateMiddleware(productSchemaValidation, "body", { form: "product" }), createProduct);
 
 
 module.exports = productRouter;

@@ -8,9 +8,9 @@ const { loginSchemaValidation, userSchemaValidation } = require("../../validatio
 
 
 
-authRouter.post("/auth/login", validateMiddleware(loginSchemaValidation), loginUser);
+authRouter.post("/auth/login", validateMiddleware(loginSchemaValidation, "body", { form: "login" }), loginUser);
 
-authRouter.post("/auth/register", validateMiddleware(userSchemaValidation), registerUser);
+authRouter.post("/auth/register", validateMiddleware(userSchemaValidation, "body", { form: "register" }), registerUser);
 
 
 

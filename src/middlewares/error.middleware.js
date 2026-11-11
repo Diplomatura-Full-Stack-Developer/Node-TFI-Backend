@@ -3,6 +3,7 @@ const { z } = require("zod");
 const handleMongooseError = require("./errors/handle-mongoose-error");
 const handleZodError = require("./errors/handle-zod-error");
 const handleAppError = require("./errors/handle-app-error");
+const handleUnknownError = require("./errors/handle-unknow-error");
 
 const errorMiddleware = (err, req, res, next) => {
 
