@@ -42,6 +42,7 @@ app.use(
 - Se implementa un **middleware** para la autenticación de los endpoints que lo requieren. En este caso, los endpoints relacionados con las páginas del carrito.<br>
 - Se implementan esquemas de validación de datos con **zod** para validar los datos de entrada de los endpoints.<br>
 - Se implementan solo algunos esquemas de validación con el objetivo de cumplir con las consignas de la tarea. En una aplicación real se podrían implementar más esquemas de validación para validar los datos de entrada de los endpoints. <br>
+- Se utiliza **Postman** para testear las APIs.<br>
 
 ### Implementación de manejo de errores:
 
@@ -94,6 +95,7 @@ npm run dev
 - bcryptjs - Versión 6.0.0 ([https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs))
 - jsonwebtoken - Versión 9.0.3 ([https://www.npmjs.com/package/jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken))
 - zod - Versión 4.6.7 ([https://www.npmjs.com/package/zod](https://www.npmjs.com/package/zod))
+- Postman - Versión 12.36.3 ([https://www.postman.com/](https://www.postman.com/))
 
 ### Alumno: Rubén Seco
 

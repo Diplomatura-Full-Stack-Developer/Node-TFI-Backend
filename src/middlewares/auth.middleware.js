@@ -7,14 +7,14 @@ const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return next(new AppError("AUTHORIZATION_HEADER_MISSING", "Authorization header missing", 401));
+    return next(new AppError("AUTHORIZATION_HEADER_MISSING", "Debe iniciar sesión para acceder", 401));
   }
 
   // Extract token from "Bearer <token>"
   const token = authHeader.split(' ')[1];
 
   if (!token) {
-    return next(new AppError("TOKEN_MISSING", "Token missing", 401));
+    return next(new AppError("TOKEN_MISSING", "Token faltante", 401));
   }
 
   try {
@@ -26,8 +26,30 @@ const authenticateJWT = (req, res, next) => {
 
     next();
   } catch (error) {
-    return next(new AppError("TOKEN_INVALID", "Invalid or expired token", 403));
+    return next(new AppError("TOKEN_INVALID", "Token inválido o expirado", 403));
   }
 };
 
-module.exports = { authenticateJWT };
+const authenticateRefreshToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return next(new AppError("AUTHORIZATION_HEADER_MISSING", "Debe iniciar sesión para acceder", 401));
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  if (!token) {
+    return next(new AppError("TOKEN_MISSING", "Token faltante", 401));
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return next(new AppError("TOKEN_INVALID", "Token inválido o expirado", 403));
+  }
+};
+
+module.exports = { authenticateJWT, authenticateRefreshToken };

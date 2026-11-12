@@ -29,4 +29,14 @@ const registerUser = async (req, res) => {
     token: newUser.token,
   });
 };
-module.exports = { loginUser, registerUser };
+
+
+const refreshToken = async (req, res) => {
+  const { user, newToken } = await authService.refreshToken(req.user);
+  return res.status(200).json({
+    message: "Token refrescado exitoso",
+    user: toPublicUser(user),
+    newToken,
+  });
+};
+module.exports = { loginUser, registerUser, refreshToken };

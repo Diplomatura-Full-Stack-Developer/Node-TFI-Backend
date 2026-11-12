@@ -7,4 +7,4 @@ const handleUnknowError = (err, res) => {
   });
 };
 
-module.exports = { handleUnknowError };
+module.exports = handleUnknowError;

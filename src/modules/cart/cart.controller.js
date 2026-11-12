@@ -21,8 +21,7 @@ const addProductToCart = async (req, res) => {
 };
 
 const removeProductFromCart = async (req, res) => {
-  const { id } = req.params;
-  const { productId } = req.body;
+  const { id, productId } = req.params;
   const cart = await cartService.removeProductFromCart(id, productId);
   res.status(200).json(cart);
 };
