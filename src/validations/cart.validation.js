@@ -1,14 +1,19 @@
 const { z } = require("zod");
 
+const emptyAsMissing = (value) => (value === "" || value === null ? undefined : value);
+
 const objectIdSchema = z
   .string()
   .regex(/^[a-fA-F0-9]{24}$/, { message: "El id no tiene un formato válido" });
 
 const cartItemSchema = z.object({
   productId: objectIdSchema,
-  quantity: z.coerce
-    .int({ error: "La cantidad debe ser un número entero" })
-    .min(1, { message: "La cantidad mínima es 1" }),
+  quantity: z.preprocess(
+    emptyAsMissing,
+    z.coerce.number({ error: "El stock debe ser un número entero" })
+      .int({ error: "El stock debe ser un número entero" })
+      .min(0, { message: "El stock no puede ser negativo" }),
+  )
 });
 
 const cartSchemaValidation = z.object({

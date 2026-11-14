@@ -13,13 +13,14 @@ const productSchemaValidation = z.object({
   ),
   stock: z.preprocess(
     emptyAsMissing,
-    z.coerce.int({ error: "El stock debe ser un número entero" })
+    z.int({ error: "El stock debe ser un número entero" })
       .min(0, { message: "El stock no puede ser negativo" }),
   ),
   discount: z.preprocess(
     emptyAsMissing,
-    z.coerce.number({ error: "El descuento debe ser un número" })
-      .min(0, { message: "El descuento no puede ser negativo" })
+    z.coerce.number({ error: "El stock debe ser un número entero" })
+      .int({ error: "El stock debe ser un número entero" })
+      .min(0, { message: "El stock no puede ser negativo" })
       .max(40, { message: "El descuento no puede ser mayor a 40" }),
   ),
   offer: z.boolean(),
