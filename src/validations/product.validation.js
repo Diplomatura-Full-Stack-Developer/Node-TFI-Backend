@@ -13,7 +13,7 @@ const productSchemaValidation = z.object({
   ),
   stock: z.preprocess(
     emptyAsMissing,
-    z.coerce.number({ error: "El stock debe ser un número" })
+    z.coerce.int({ error: "El stock debe ser un número entero" })
       .min(0, { message: "El stock no puede ser negativo" }),
   ),
   discount: z.preprocess(
