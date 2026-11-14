@@ -12,16 +12,24 @@ const getProducts = async () => {
 }
 
 
+const mongoose = require("mongoose");
+
 const getProductById = async (id) => {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new AppError("PRODUCT_NOT_FOUND", "Producto no encontrado", 404);
+  }
+
   const product = await productModel.findById(id);
   if (!product) {
     throw new AppError("PRODUCT_NOT_FOUND", "Producto no encontrado", 404);
   }
+
   return {
     message: "Producto obtenido correctamente",
     data: product,
   };
 };
+
 
 const createProduct = async (product) => {
   const newProduct = await productModel.create(product);
